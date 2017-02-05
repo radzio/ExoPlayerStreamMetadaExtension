@@ -1,4 +1,4 @@
-package net.droidlabs.exoplayer.icystream.example;
+package net.droidlabs.exoplayer.extensions.streammetadata.example;
 
 import org.junit.Test;
 

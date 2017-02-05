@@ -1,4 +1,4 @@
-package net.droidlabs.exoplayer.icystream;
+package net.droidlabs.exoplayer.extensions.streammetadata.example;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     // Context of the app under test.
     Context appContext = InstrumentationRegistry.getTargetContext();
 
-    assertEquals("net.droidlabs.exoplayer.icystream.test", appContext.getPackageName());
+    assertEquals("net.droidlabs.exoplayer.extensions.streammetadata.example", appContext.getPackageName());
   }
 }

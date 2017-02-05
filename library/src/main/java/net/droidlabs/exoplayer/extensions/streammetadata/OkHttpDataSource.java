@@ -1,4 +1,21 @@
-package net.droidlabs.exoplayer.icystream;
+/*
+ * Copyright (C) 2016 The Android Open Source Project
+ * Modifications Copyright (C) 2017 Radosław Piekarz
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package net.droidlabs.exoplayer.extensions.streammetadata;
 
 import android.net.Uri;
 import android.util.Log;
@@ -162,9 +179,9 @@ public class OkHttpDataSource implements HttpDataSource {
 
         if (period > 0) {
 
-          responseByteStream = new IcyInputStream(responseByteStream, period, new PlayerMetadataListener() {
+          responseByteStream = new IcyInputStream(responseByteStream, period, new MetadataListener() {
             @Override
-            public void onMetaDataRetrieved(String key, String value) {
+            public void onMetadataRetrieved(String key, String value) {
               Log.d(TAG, String.format("%s %s", key, value));
             }
 
@@ -280,7 +297,7 @@ public class OkHttpDataSource implements HttpDataSource {
   private Request makeRequest(DataSpec dataSpec) {
     long position = dataSpec.position;
     long length = dataSpec.length;
-    boolean allowGzip = (dataSpec.flags & DataSpec.FLAG_ALLOW_GZIP) != 0;
+    boolean allowGzip = dataSpec.isFlagSet(DataSpec.FLAG_ALLOW_GZIP);
 
     HttpUrl url = HttpUrl.parse(dataSpec.uri.toString());
     Request.Builder builder = new Request.Builder().url(url);

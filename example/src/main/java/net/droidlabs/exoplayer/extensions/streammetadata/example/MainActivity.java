@@ -1,4 +1,4 @@
-package net.droidlabs.exoplayer.icystream.example;
+package net.droidlabs.exoplayer.extensions.streammetadata.example;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+
+import net.droidlabs.exoplayer.extensions.streammetadata.OkHttpDataSourceFactory;
 
 import okhttp3.OkHttpClient;
 
@@ -32,14 +34,16 @@ public class MainActivity extends AppCompatActivity {
     player.setPlayWhenReady(true);
 
     DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-    OkHttpDataSourceFactory okHttpDataSourceFactory = new OkHttpDataSourceFactory(new OkHttpClient(),
+    OkHttpDataSourceFactory okHttpDataSourceFactory = new OkHttpDataSourceFactory(
+        new OkHttpClient(),
         "SomeUserAgent",
         bandwidthMeter);
 
     DefaultDataSourceFactory factory = new DefaultDataSourceFactory(this, bandwidthMeter,
         okHttpDataSourceFactory);
 
-    MediaSource mediaSource = new ExtractorMediaSource(Uri.parse("http://195.150.20.9/RMFFM48"), factory,
+    MediaSource mediaSource = new ExtractorMediaSource(Uri.parse("http://195.150.20.9/RMFFM48"),
+        factory,
         new DefaultExtractorsFactory(), handler, null);
 
     player.prepare(mediaSource, true, true);
